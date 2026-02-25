@@ -4,7 +4,7 @@ version = "0.4.1"
 edition = "2021"
 authors = ["Zentinel Contributors"]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/zentinelproxy/zentinel"
+repository = "https://github.com/leonardopedro/zentinel"
 description = "Example WASM agent for path-based allowlist/denylist"
 
 [lib]

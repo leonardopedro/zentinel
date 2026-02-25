@@ -197,7 +197,7 @@ crates/common/docs/          # Shared types, errors, patterns
 **Update when:** Changing APIs, adding features, modifying behavior.
 
 #### 2. Documentation site (separate repo)
-**Repo:** `github.com/zentinelproxy/zentinelproxy.io-docs`
+**Repo:** `github.com/leonardopedro/zentinelproxy.io-docs`
 **Live:** https://zentinelproxy.io/docs
 
 Contains user-facing documentation: getting started, configuration guides, examples, operations, deployment.

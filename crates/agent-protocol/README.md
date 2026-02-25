@@ -179,11 +179,11 @@ Official SDKs are available for building agents in your preferred language:
 
 | Language | Repository | Installation |
 |----------|------------|--------------|
-| **Python** | [zentinel-agent-python-sdk](https://github.com/zentinelproxy/zentinel-agent-python-sdk) | `pip install zentinel-agent-sdk` |
-| **TypeScript** | [zentinel-agent-typescript-sdk](https://github.com/zentinelproxy/zentinel-agent-typescript-sdk) | `npm install zentinel-agent-sdk` |
-| **Go** | [zentinel-agent-go-sdk](https://github.com/zentinelproxy/zentinel-agent-go-sdk) | `go get github.com/zentinelproxy/zentinel-agent-go-sdk` |
-| **Rust** | [zentinel-agent-rust-sdk](https://github.com/zentinelproxy/zentinel-agent-rust-sdk) | `zentinel-agent-sdk = "0.1"` |
-| **Elixir** | [zentinel-agent-elixir-sdk](https://github.com/zentinelproxy/zentinel-agent-elixir-sdk) | `{:zentinel_agent_sdk, github: "zentinelproxy/zentinel-agent-elixir-sdk"}` |
+| **Python** | [zentinel-agent-python-sdk](https://github.com/leonardopedro/zentinel-agent-python-sdk) | `pip install zentinel-agent-sdk` |
+| **TypeScript** | [zentinel-agent-typescript-sdk](https://github.com/leonardopedro/zentinel-agent-typescript-sdk) | `npm install zentinel-agent-sdk` |
+| **Go** | [zentinel-agent-go-sdk](https://github.com/leonardopedro/zentinel-agent-go-sdk) | `go get github.com/leonardopedro/zentinel-agent-go-sdk` |
+| **Rust** | [zentinel-agent-rust-sdk](https://github.com/leonardopedro/zentinel-agent-rust-sdk) | `zentinel-agent-sdk = "0.1"` |
+| **Elixir** | [zentinel-agent-elixir-sdk](https://github.com/leonardopedro/zentinel-agent-elixir-sdk) | `{:zentinel_agent_sdk, github: "leonardopedro/zentinel-agent-elixir-sdk"}` |
 
 All SDKs implement the same protocol and provide:
 - Simple agent interface with lifecycle hooks

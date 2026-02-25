@@ -15,7 +15,7 @@
 set -e
 
 # Configuration
-REPO="zentinelproxy/zentinel"
+REPO="leonardopedro/zentinel"
 BINARY_NAME="zentinel"
 INSTALL_DIR="/usr/local/bin"
 FALLBACK_DIR="$HOME/.local/bin"
@@ -241,7 +241,7 @@ show_help() {
     cat << EOF
 Zentinel Install Script
 
-Usage: curl -fsSL https://raw.githubusercontent.com/zentinelproxy/zentinel/main/install.sh | sh
+Usage: curl -fsSL https://raw.githubusercontent.com/leonardopedro/zentinel/main/install.sh | sh
 
 Options:
     --help      Show this help message

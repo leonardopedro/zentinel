@@ -28,7 +28,7 @@
 - [ ] All new and existing tests pass locally
 - [ ] I have updated documentation (if applicable)
   - [ ] Crate `docs/` updated
-  - [ ] [Docs site](https://github.com/zentinelproxy/zentinelproxy.io-docs) PR opened (if user-visible)
+  - [ ] [Docs site](https://github.com/leonardopedro/zentinelproxy.io-docs) PR opened (if user-visible)
 
 ## Testing
 

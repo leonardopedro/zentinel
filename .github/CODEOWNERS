@@ -1,20 +1,20 @@
 # Default owners for everything in the repo
-* @zentinelproxy/zentinel-maintainers
+* @leonardopedro/zentinel-maintainers
 
 # Core proxy - requires careful review
-/crates/proxy/ @zentinelproxy/zentinel-maintainers
+/crates/proxy/ @leonardopedro/zentinel-maintainers
 
 # Configuration - affects all users
-/crates/config/ @zentinelproxy/zentinel-maintainers
+/crates/config/ @leonardopedro/zentinel-maintainers
 
 # Agent protocol - affects agent compatibility
-/crates/agent-protocol/ @zentinelproxy/zentinel-maintainers
+/crates/agent-protocol/ @leonardopedro/zentinel-maintainers
 
 # Documentation
-/.claude/ @zentinelproxy/zentinel-maintainers
-/MANIFESTO.md @zentinelproxy/zentinel-maintainers
-/CONTRIBUTING.md @zentinelproxy/zentinel-maintainers
+/.claude/ @leonardopedro/zentinel-maintainers
+/MANIFESTO.md @leonardopedro/zentinel-maintainers
+/CONTRIBUTING.md @leonardopedro/zentinel-maintainers
 
 # CI/CD and release
-/.github/workflows/ @zentinelproxy/zentinel-maintainers
-/Dockerfile @zentinelproxy/zentinel-maintainers
+/.github/workflows/ @leonardopedro/zentinel-maintainers
+/Dockerfile @leonardopedro/zentinel-maintainers

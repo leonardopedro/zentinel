@@ -623,11 +623,11 @@ For language-specific examples with idiomatic APIs, see the official SDKs:
 
 | Language | Examples |
 |----------|----------|
-| **Python** | [examples/](https://github.com/zentinelproxy/zentinel-agent-python-sdk/tree/main/examples) - Simple agent, configurable agent, body inspection |
-| **TypeScript** | [examples/](https://github.com/zentinelproxy/zentinel-agent-typescript-sdk/tree/main/examples) - Simple agent, configurable agent |
-| **Go** | [examples/](https://github.com/zentinelproxy/zentinel-agent-go-sdk/tree/main/examples) - Simple agent, configurable agent, body inspection |
-| **Rust** | [examples/](https://github.com/zentinelproxy/zentinel-agent-rust-sdk/tree/main/examples) - Simple agent, configurable agent, body inspection |
-| **Elixir** | [examples/](https://github.com/zentinelproxy/zentinel-agent-elixir-sdk/tree/main/examples) - Simple agent, configurable agent, body inspection |
+| **Python** | [examples/](https://github.com/leonardopedro/zentinel-agent-python-sdk/tree/main/examples) - Simple agent, configurable agent, body inspection |
+| **TypeScript** | [examples/](https://github.com/leonardopedro/zentinel-agent-typescript-sdk/tree/main/examples) - Simple agent, configurable agent |
+| **Go** | [examples/](https://github.com/leonardopedro/zentinel-agent-go-sdk/tree/main/examples) - Simple agent, configurable agent, body inspection |
+| **Rust** | [examples/](https://github.com/leonardopedro/zentinel-agent-rust-sdk/tree/main/examples) - Simple agent, configurable agent, body inspection |
+| **Elixir** | [examples/](https://github.com/leonardopedro/zentinel-agent-elixir-sdk/tree/main/examples) - Simple agent, configurable agent, body inspection |
 
 Each SDK provides comprehensive documentation at `docs/examples.md` with patterns for:
 - IP-based access control

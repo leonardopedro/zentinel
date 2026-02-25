@@ -305,7 +305,7 @@ download_agent() {
     local name="$1"
     local binary
     binary=$(agent_binary "$name")
-    local repo_slug="zentinelproxy/zentinel-agent-$name"
+    local repo_slug="leonardopedro/zentinel-agent-$name"
 
     [[ -z "$PLATFORM" ]] && return 1
 

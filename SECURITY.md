@@ -17,7 +17,7 @@ Instead, report them privately via GitHub:
 
 **[@raffaelschneider](https://github.com/raffaelschneider)**
 
-You can use [GitHub's private vulnerability reporting](https://github.com/zentinelproxy/zentinel/security/advisories/new) if enabled, or contact directly via GitHub.
+You can use [GitHub's private vulnerability reporting](https://github.com/leonardopedro/zentinel/security/advisories/new) if enabled, or contact directly via GitHub.
 
 Please include:
 
@@ -70,5 +70,5 @@ Zentinel's security is built on the principles in our [Manifesto](MANIFESTO.md):
 
 Security updates are announced via:
 
-- [GitHub Security Advisories](https://github.com/zentinelproxy/zentinel/security/advisories)
-- [GitHub Releases](https://github.com/zentinelproxy/zentinel/releases)
+- [GitHub Security Advisories](https://github.com/leonardopedro/zentinel/security/advisories)
+- [GitHub Releases](https://github.com/leonardopedro/zentinel/releases)

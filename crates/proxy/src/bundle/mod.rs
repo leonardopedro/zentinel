@@ -33,9 +33,9 @@
 //! denylist = "0.2.0"
 //!
 //! [repositories]
-//! waf = "zentinelproxy/zentinel-agent-waf"
-//! ratelimit = "zentinelproxy/zentinel-agent-ratelimit"
-//! denylist = "zentinelproxy/zentinel-agent-denylist"
+//! waf = "leonardopedro/zentinel-agent-waf"
+//! ratelimit = "leonardopedro/zentinel-agent-ratelimit"
+//! denylist = "leonardopedro/zentinel-agent-denylist"
 //! ```
 
 mod commands;

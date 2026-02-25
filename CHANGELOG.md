@@ -327,7 +327,7 @@ Same as 26.01_6.
 
 **Crate version:** 0.2.3
 
-See [GitHub Release](https://github.com/zentinelproxy/zentinel/releases/tag/26.01_3).
+See [GitHub Release](https://github.com/leonardopedro/zentinel/releases/tag/26.01_3).
 
 ---
 
@@ -337,7 +337,7 @@ See [GitHub Release](https://github.com/zentinelproxy/zentinel/releases/tag/26.0
 
 First release using CalVer tagging.
 
-See [GitHub Release](https://github.com/zentinelproxy/zentinel/releases/tag/26.01_0).
+See [GitHub Release](https://github.com/leonardopedro/zentinel/releases/tag/26.01_0).
 
 ---
 
@@ -348,7 +348,7 @@ See [GitHub Release](https://github.com/zentinelproxy/zentinel/releases/tag/26.0
 
 Initial public release series. Core proxy, routing, upstreams, agent system, observability, and KDL configuration.
 
-See [GitHub Releases](https://github.com/zentinelproxy/zentinel/releases?q=25.12) for individual release notes.
+See [GitHub Releases](https://github.com/leonardopedro/zentinel/releases?q=25.12) for individual release notes.
 
 ---
 
@@ -359,20 +359,20 @@ See [GitHub Releases](https://github.com/zentinelproxy/zentinel/releases?q=25.12
 
 Initial development releases.
 
-See [GitHub Releases](https://github.com/zentinelproxy/zentinel/releases?q=24.12) for individual release notes.
+See [GitHub Releases](https://github.com/leonardopedro/zentinel/releases?q=24.12) for individual release notes.
 
 ---
 
-[26.02_14]: https://github.com/zentinelproxy/zentinel/compare/26.02_13...26.02_14
-[26.02_1]: https://github.com/zentinelproxy/zentinel/compare/26.02_0...26.02_1
-[26.02_0]: https://github.com/zentinelproxy/zentinel/compare/26.01_11...26.02_0
-[26.01_11]: https://github.com/zentinelproxy/zentinel/compare/26.01_10...26.01_11
-[26.01_10]: https://github.com/zentinelproxy/zentinel/compare/26.01_9...26.01_10
-[26.01_9]: https://github.com/zentinelproxy/zentinel/compare/26.01_8...26.01_9
-[26.01_8]: https://github.com/zentinelproxy/zentinel/compare/26.01_7...26.01_8
-[26.01_7]: https://github.com/zentinelproxy/zentinel/compare/26.01_6...26.01_7
-[26.01_6]: https://github.com/zentinelproxy/zentinel/compare/26.01_5...26.01_6
-[26.01_5]: https://github.com/zentinelproxy/zentinel/compare/26.01_4...26.01_5
-[26.01_4]: https://github.com/zentinelproxy/zentinel/compare/26.01_3...26.01_4
-[26.01_3]: https://github.com/zentinelproxy/zentinel/compare/26.01_0...26.01_3
-[26.01_0]: https://github.com/zentinelproxy/zentinel/releases/tag/26.01_0
+[26.02_14]: https://github.com/leonardopedro/zentinel/compare/26.02_13...26.02_14
+[26.02_1]: https://github.com/leonardopedro/zentinel/compare/26.02_0...26.02_1
+[26.02_0]: https://github.com/leonardopedro/zentinel/compare/26.01_11...26.02_0
+[26.01_11]: https://github.com/leonardopedro/zentinel/compare/26.01_10...26.01_11
+[26.01_10]: https://github.com/leonardopedro/zentinel/compare/26.01_9...26.01_10
+[26.01_9]: https://github.com/leonardopedro/zentinel/compare/26.01_8...26.01_9
+[26.01_8]: https://github.com/leonardopedro/zentinel/compare/26.01_7...26.01_8
+[26.01_7]: https://github.com/leonardopedro/zentinel/compare/26.01_6...26.01_7
+[26.01_6]: https://github.com/leonardopedro/zentinel/compare/26.01_5...26.01_6
+[26.01_5]: https://github.com/leonardopedro/zentinel/compare/26.01_4...26.01_5
+[26.01_4]: https://github.com/leonardopedro/zentinel/compare/26.01_3...26.01_4
+[26.01_3]: https://github.com/leonardopedro/zentinel/compare/26.01_0...26.01_3
+[26.01_0]: https://github.com/leonardopedro/zentinel/releases/tag/26.01_0

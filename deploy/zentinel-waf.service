@@ -1,6 +1,6 @@
 [Unit]
 Description=Zentinel WAF Agent - ModSecurity-based Web Application Firewall
-Documentation=https://github.com/zentinelproxy/zentinel
+Documentation=https://github.com/leonardopedro/zentinel
 After=network.target zentinel-proxy.service
 Requires=zentinel-proxy.service
 PartOf=zentinel-proxy.service

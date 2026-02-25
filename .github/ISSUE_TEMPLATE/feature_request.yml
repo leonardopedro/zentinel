@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Before proposing a feature, please read the [Manifesto](https://github.com/zentinelproxy/zentinel/blob/main/MANIFESTO.md).
+        Before proposing a feature, please read the [Manifesto](https://github.com/leonardopedro/zentinel/blob/main/MANIFESTO.md).
 
         Zentinel values **predictability over flexibility** and **calm operation over feature breadth**.
 
@@ -70,5 +70,5 @@ body:
       options:
         - label: I have searched existing issues for duplicates
           required: true
-        - label: I have read the [Manifesto](https://github.com/zentinelproxy/zentinel/blob/main/MANIFESTO.md)
+        - label: I have read the [Manifesto](https://github.com/leonardopedro/zentinel/blob/main/MANIFESTO.md)
           required: true

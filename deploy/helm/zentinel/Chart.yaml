@@ -22,7 +22,7 @@ keywords:
 # Project home and sources
 home: https://zentinelproxy.io
 sources:
-  - https://github.com/zentinelproxy/zentinel
+  - https://github.com/leonardopedro/zentinel
 
 # Maintainers
 maintainers:
@@ -31,7 +31,7 @@ maintainers:
     url: https://github.com/zentinelproxy
 
 # Icon (optional)
-icon: https://raw.githubusercontent.com/zentinelproxy/zentinel/main/docs/logo.png
+icon: https://raw.githubusercontent.com/leonardopedro/zentinel/main/docs/logo.png
 
 # Minimum Kubernetes version
 kubeVersion: ">=1.21.0-0"
@@ -66,4 +66,4 @@ annotations:
 
   # Chart documentation
   documentation.url: https://zentinelproxy.io/docs/deployment/kubernetes/
-  support.url: https://github.com/zentinelproxy/zentinel/issues
+  support.url: https://github.com/leonardopedro/zentinel/issues

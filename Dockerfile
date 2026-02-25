@@ -93,7 +93,7 @@ COPY config/docker/default.kdl /etc/zentinel/config.kdl
 LABEL org.opencontainers.image.title="Zentinel" \
       org.opencontainers.image.description="Security-first reverse proxy built on Pingora" \
       org.opencontainers.image.vendor="Raskell" \
-      org.opencontainers.image.source="https://github.com/zentinelproxy/zentinel"
+      org.opencontainers.image.source="https://github.com/leonardopedro/zentinel"
 
 # Environment variables
 # - RUST_LOG: Logging configuration

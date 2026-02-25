@@ -1,6 +1,6 @@
 [Unit]
 Description=Zentinel Echo Agent - Reference Implementation
-Documentation=https://github.com/zentinelproxy/zentinel
+Documentation=https://github.com/leonardopedro/zentinel
 After=network.target zentinel.service
 PartOf=zentinel.service
 StartLimitIntervalSec=60

@@ -12,6 +12,19 @@ keywords = ["proxy", "reverse-proxy", "http", "security", "pingora"]
 categories = ["network-programming", "web-programming::http-server"]
 readme = "../../README.md"
 
+[package.metadata.deb]
+maintainer = "Zentinel Contributors <maintainers@zentinel.io>"
+copyright = "2024, Zentinel Contributors"
+license-file = ["../../LICENSE", "0"]
+depends = "$auto, libssl3, ca-certificates"
+section = "net"
+priority = "optional"
+assets = [
+    ["target/release/zentinel", "/usr/bin/zentinel", "755"],
+    ["../../config/zentinel.kdl", "/etc/zentinel/zentinel.kdl", "644"],
+    ["../../deploy/zentinel.service", "/lib/systemd/system/zentinel.service", "644"],
+]
+
 [lib]
 name = "zentinel_proxy"
 path = "src/lib.rs"

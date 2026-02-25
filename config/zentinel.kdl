@@ -96,6 +96,21 @@ filters {
 
 // Route configurations
 routes {
+    // Secure proxy route with transformation plugin example
+    route "secure_proxy" {
+        priority "high"
+        matches { 
+            path-prefix "/secure/" 
+        }
+        plugins {
+            plugin "transform" {
+                // This replaces the placeholder in the packet body
+                replace "{{MY_PASSWORD}}" "ActualSecret123"
+            }
+        }
+        upstream "default-backend"
+    }
+
     // API routes with high priority
     route "api-v1" {
         priority "high"

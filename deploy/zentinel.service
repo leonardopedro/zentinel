@@ -8,7 +8,7 @@ StartLimitBurst=3
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/zentinel
+ExecStart=/usr/bin/zentinel
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStop=/bin/kill -TERM $MAINPID
 Restart=on-failure
@@ -25,7 +25,7 @@ UMask=0077
 
 # Environment
 Environment="RUST_LOG=info"
-Environment="ZENTINEL_CONFIG=/etc/zentinel/config.kdl"
+Environment="ZENTINEL_CONFIG=/etc/zentinel/zentinel.kdl"
 EnvironmentFile=-/etc/zentinel/env
 
 # Working directory

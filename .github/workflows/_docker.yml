@@ -34,7 +34,7 @@ env:
   REGISTRY: ghcr.io
   # Hardcoded to avoid github.repository returning stale pre-transfer name (raskell-io/sentinel)
   IMAGE_NAME: leonardopedro/zentinel
-  ECHO_IMAGE_NAME: leonardopedro/zentinel-echo
+  ECHO_IMAGE_NAME: zentinelproxy/zentinel-echo
 
 jobs:
   build-and-push:

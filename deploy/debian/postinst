@@ -1,0 +1,37 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        if ! getent group zentinel >/dev/null; then
+            addgroup --system zentinel
+        fi
+
+        if ! getent passwd zentinel >/dev/null; then
+            adduser --system --ingroup zentinel --home /var/lib/zentinel --no-create-home --shell /bin/false zentinel
+        fi
+
+        # Ensure directory permissions
+        mkdir -p /etc/zentinel
+        chown -R zentinel:zentinel /etc/zentinel
+        chmod 755 /etc/zentinel
+
+        mkdir -p /var/log/zentinel
+        chown -R zentinel:zentinel /var/log/zentinel
+        chmod 755 /var/log/zentinel
+
+        mkdir -p /var/lib/zentinel
+        chown -R zentinel:zentinel /var/lib/zentinel
+        chmod 700 /var/lib/zentinel
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

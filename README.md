@@ -153,19 +153,19 @@ The goal is infrastructure that is **correct, calm, and trustworthy**. See [`MAN
 
 Zentinel's security and extensibility lives in **agents** — external processes that hook into every request phase. Agents are crash-isolated from the proxy, independently deployable, and can be written in any language.
 
-Agent SDKs: [Rust](https://github.com/leonardopedro/zentinel-agent-rust-sdk) · [Go](https://github.com/leonardopedro/zentinel-agent-go-sdk) · [Python](https://github.com/leonardopedro/zentinel-agent-python-sdk) · [TypeScript](https://github.com/leonardopedro/zentinel-agent-typescript-sdk) · [Elixir](https://github.com/leonardopedro/zentinel-agent-elixir-sdk) · [Kotlin](https://github.com/leonardopedro/zentinel-agent-kotlin-sdk) · [Haskell](https://github.com/leonardopedro/zentinel-agent-haskell-sdk)
+Agent SDKs: [Rust](https://github.com/zentinelproxy/zentinel-agent-rust-sdk) · [Go](https://github.com/zentinelproxy/zentinel-agent-go-sdk) · [Python](https://github.com/zentinelproxy/zentinel-agent-python-sdk) · [TypeScript](https://github.com/zentinelproxy/zentinel-agent-typescript-sdk) · [Elixir](https://github.com/zentinelproxy/zentinel-agent-elixir-sdk) · [Kotlin](https://github.com/zentinelproxy/zentinel-agent-kotlin-sdk) · [Haskell](https://github.com/zentinelproxy/zentinel-agent-haskell-sdk)
 
 | Agent | Description |
 |-------|-------------|
-| [WAF](https://github.com/leonardopedro/zentinel-agent-waf) | Pure Rust WAF — 200+ detection rules, ML-powered anomaly scoring, zero C dependencies |
-| [AI Gateway](https://github.com/leonardopedro/zentinel-agent-ai-gateway) | Prompt injection detection, jailbreak prevention, PII filtering for LLM APIs |
-| [Policy](https://github.com/leonardopedro/zentinel-agent-policy) | Multi-engine policy evaluation (Rego/OPA and Cedar) — written in Haskell |
-| [Auth](https://github.com/leonardopedro/zentinel-agent-auth) | JWT, OIDC, SAML, mTLS, API keys with Cedar-based fine-grained authorization |
-| [Chaos](https://github.com/leonardopedro/zentinel-agent-chaos) | Latency injection, error simulation, connection resets with safety guardrails |
-| [Lua](https://github.com/leonardopedro/zentinel-agent-lua) | Sandboxed Lua scripting with VM pooling, hot-reload, and resource limits |
-| [ZentinelSec](https://github.com/leonardopedro/zentinel-agent-zentinelsec) | Pure Rust ModSecurity — OWASP CRS-compatible SecLang parser, zero C dependencies |
-| [WebSocket Inspector](https://github.com/leonardopedro/zentinel-agent-websocket-inspector) | Content filtering, JSON/MessagePack validation, and rate limiting for WebSocket frames |
-| [MQTT Gateway](https://github.com/leonardopedro/zentinel-agent-mqtt-gateway) | IoT protocol security with topic ACLs, auth, and payload inspection |
+| [WAF](https://github.com/zentinelproxy/zentinel-agent-waf) | Pure Rust WAF — 200+ detection rules, ML-powered anomaly scoring, zero C dependencies |
+| [AI Gateway](https://github.com/zentinelproxy/zentinel-agent-ai-gateway) | Prompt injection detection, jailbreak prevention, PII filtering for LLM APIs |
+| [Policy](https://github.com/zentinelproxy/zentinel-agent-policy) | Multi-engine policy evaluation (Rego/OPA and Cedar) — written in Haskell |
+| [Auth](https://github.com/zentinelproxy/zentinel-agent-auth) | JWT, OIDC, SAML, mTLS, API keys with Cedar-based fine-grained authorization |
+| [Chaos](https://github.com/zentinelproxy/zentinel-agent-chaos) | Latency injection, error simulation, connection resets with safety guardrails |
+| [Lua](https://github.com/zentinelproxy/zentinel-agent-lua) | Sandboxed Lua scripting with VM pooling, hot-reload, and resource limits |
+| [ZentinelSec](https://github.com/zentinelproxy/zentinel-agent-zentinelsec) | Pure Rust ModSecurity — OWASP CRS-compatible SecLang parser, zero C dependencies |
+| [WebSocket Inspector](https://github.com/zentinelproxy/zentinel-agent-websocket-inspector) | Content filtering, JSON/MessagePack validation, and rate limiting for WebSocket frames |
+| [MQTT Gateway](https://github.com/zentinelproxy/zentinel-agent-mqtt-gateway) | IoT protocol security with topic ACLs, auth, and payload inspection |
 
 Browse all 25+ agents at [zentinelproxy.io/agents](https://zentinelproxy.io/agents/).
 
@@ -189,7 +189,7 @@ Each crate has its own `docs/` directory with detailed documentation.
 
 ## Control Plane
 
-[**zentinel-control-plane**](https://github.com/leonardopedro/zentinel-control-plane) — Fleet management for Zentinel proxies, built with Elixir/Phoenix. Centralized configuration, rolling deploys, and real-time observability across your Zentinel instances.
+[**zentinel-control-plane**](https://github.com/zentinelproxy/zentinel-control-plane) — Fleet management for Zentinel proxies, built with Elixir/Phoenix. Centralized configuration, rolling deploys, and real-time observability across your Zentinel instances.
 
 ## Contributing
 

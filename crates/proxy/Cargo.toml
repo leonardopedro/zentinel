@@ -24,6 +24,7 @@ assets = [
     ["../../config/zentinel.kdl", "/etc/zentinel/zentinel.kdl", "644"],
     ["../../deploy/zentinel.service", "/lib/systemd/system/zentinel.service", "644"],
 ]
+maintainer-scripts = "../../deploy/debian"
 
 [lib]
 name = "zentinel_proxy"

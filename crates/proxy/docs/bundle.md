@@ -162,9 +162,9 @@ ratelimit = "0.2.0"
 denylist = "0.2.0"
 
 [repositories]
-waf = "leonardopedro/zentinel-agent-waf"
-ratelimit = "leonardopedro/zentinel-agent-ratelimit"
-denylist = "leonardopedro/zentinel-agent-denylist"
+waf = "zentinelproxy/zentinel-agent-waf"
+ratelimit = "zentinelproxy/zentinel-agent-ratelimit"
+denylist = "zentinelproxy/zentinel-agent-denylist"
 ```
 
 The lock file is embedded in the Zentinel binary at build time, ensuring reproducible installations.

@@ -51,41 +51,41 @@ spiffe = "0.3.0"
 
 [repositories]
 # Core agents
-waf = "leonardopedro/zentinel-agent-waf"
-ratelimit = "leonardopedro/zentinel-agent-ratelimit"
-denylist = "leonardopedro/zentinel-agent-denylist"
+waf = "zentinelproxy/zentinel-agent-waf"
+ratelimit = "zentinelproxy/zentinel-agent-ratelimit"
+denylist = "zentinelproxy/zentinel-agent-denylist"
 
 # Security agents
-zentinelsec = "leonardopedro/zentinel-agent-zentinelsec"
-modsec = "leonardopedro/zentinel-agent-modsec"
-ip-reputation = "leonardopedro/zentinel-agent-ip-reputation"
-bot-management = "leonardopedro/zentinel-agent-bot-management"
-content-scanner = "leonardopedro/zentinel-agent-content-scanner"
+zentinelsec = "zentinelproxy/zentinel-agent-zentinelsec"
+modsec = "zentinelproxy/zentinel-agent-modsec"
+ip-reputation = "zentinelproxy/zentinel-agent-ip-reputation"
+bot-management = "zentinelproxy/zentinel-agent-bot-management"
+content-scanner = "zentinelproxy/zentinel-agent-content-scanner"
 
 # API security agents
-graphql-security = "leonardopedro/zentinel-agent-graphql-security"
-grpc-inspector = "leonardopedro/zentinel-agent-grpc-inspector"
-soap = "leonardopedro/zentinel-agent-soap"
-api-deprecation = "leonardopedro/zentinel-agent-api-deprecation"
+graphql-security = "zentinelproxy/zentinel-agent-graphql-security"
+grpc-inspector = "zentinelproxy/zentinel-agent-grpc-inspector"
+soap = "zentinelproxy/zentinel-agent-soap"
+api-deprecation = "zentinelproxy/zentinel-agent-api-deprecation"
 
 # Protocol agents
-websocket-inspector = "leonardopedro/zentinel-agent-websocket-inspector"
-mqtt-gateway = "leonardopedro/zentinel-agent-mqtt-gateway"
+websocket-inspector = "zentinelproxy/zentinel-agent-websocket-inspector"
+mqtt-gateway = "zentinelproxy/zentinel-agent-mqtt-gateway"
 
 # Scripting agents
-lua = "leonardopedro/zentinel-agent-lua"
-js = "leonardopedro/zentinel-agent-js"
-wasm = "leonardopedro/zentinel-agent-wasm"
+lua = "zentinelproxy/zentinel-agent-lua"
+js = "zentinelproxy/zentinel-agent-js"
+wasm = "zentinelproxy/zentinel-agent-wasm"
 
 # Utility agents
-transform = "leonardopedro/zentinel-agent-transform"
-audit-logger = "leonardopedro/zentinel-agent-audit-logger"
-mock-server = "leonardopedro/zentinel-agent-mock-server"
-chaos = "leonardopedro/zentinel-agent-chaos"
-image-optimization = "leonardopedro/zentinel-agent-image-optimization"
+transform = "zentinelproxy/zentinel-agent-transform"
+audit-logger = "zentinelproxy/zentinel-agent-audit-logger"
+mock-server = "zentinelproxy/zentinel-agent-mock-server"
+chaos = "zentinelproxy/zentinel-agent-chaos"
+image-optimization = "zentinelproxy/zentinel-agent-image-optimization"
 
 # Identity agents
-spiffe = "leonardopedro/zentinel-agent-spiffe"
+spiffe = "zentinelproxy/zentinel-agent-spiffe"
 
 [checksums]
 # SHA256 checksums for verification (optional, updated by release CI)

@@ -147,7 +147,7 @@ pub struct AgentInfo {
     /// Version string (e.g., "0.2.0")
     pub version: String,
 
-    /// GitHub repository (e.g., "leonardopedro/zentinel-agent-waf")
+    /// GitHub repository (e.g., "zentinelproxy/zentinel-agent-waf")
     pub repository: String,
 
     /// Binary name (e.g., "zentinel-waf-agent")
@@ -383,8 +383,8 @@ waf = "0.2.0"
 ratelimit = "0.2.0"
 
 [repositories]
-waf = "leonardopedro/zentinel-agent-waf"
-ratelimit = "leonardopedro/zentinel-agent-ratelimit"
+waf = "zentinelproxy/zentinel-agent-waf"
+ratelimit = "zentinelproxy/zentinel-agent-ratelimit"
 "#;
 
         let lock = BundleLock::from_str(content).unwrap();
@@ -403,7 +403,7 @@ version = "26.01_2"
 waf = "0.3.0"
 
 [repositories]
-waf = "leonardopedro/zentinel-agent-waf"
+waf = "zentinelproxy/zentinel-agent-waf"
 
 [checksums]
 waf = "abc123def456"
@@ -423,7 +423,7 @@ version = "26.01_1"
 waf = "0.2.0"
 
 [repositories]
-waf = "leonardopedro/zentinel-agent-waf"
+waf = "zentinelproxy/zentinel-agent-waf"
 "#;
 
         let lock = BundleLock::from_str(content).unwrap();
@@ -444,7 +444,7 @@ waf = "leonardopedro/zentinel-agent-waf"
 waf = "0.2.0"
 
 [repositories]
-waf = "leonardopedro/zentinel-agent-waf"
+waf = "zentinelproxy/zentinel-agent-waf"
 "#;
         let result = BundleLock::from_str(content);
         assert!(result.is_err());
@@ -460,7 +460,7 @@ version = "26.01_1"
 waf = "0.2.0"
 
 [repositories]
-waf = "leonardopedro/zentinel-agent-waf"
+waf = "zentinelproxy/zentinel-agent-waf"
 "#;
 
         let lock = BundleLock::from_str(content).unwrap();
@@ -486,7 +486,7 @@ version = "26.01_1"
 waf = "0.2.0"
 
 [repositories]
-waf = "leonardopedro/zentinel-agent-waf"
+waf = "zentinelproxy/zentinel-agent-waf"
 "#;
 
         let lock = BundleLock::from_str(content).unwrap();
@@ -504,7 +504,7 @@ waf = "0.2.0"
 orphan = "1.0.0"
 
 [repositories]
-waf = "leonardopedro/zentinel-agent-waf"
+waf = "zentinelproxy/zentinel-agent-waf"
 "#;
 
         let lock = BundleLock::from_str(content).unwrap();
@@ -528,9 +528,9 @@ ratelimit = "0.2.0"
 denylist = "0.2.0"
 
 [repositories]
-waf = "leonardopedro/zentinel-agent-waf"
-ratelimit = "leonardopedro/zentinel-agent-ratelimit"
-denylist = "leonardopedro/zentinel-agent-denylist"
+waf = "zentinelproxy/zentinel-agent-waf"
+ratelimit = "zentinelproxy/zentinel-agent-ratelimit"
+denylist = "zentinelproxy/zentinel-agent-denylist"
 "#;
 
         let lock = BundleLock::from_str(content).unwrap();
@@ -546,7 +546,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
         let agent = AgentInfo {
             name: "waf".to_string(),
             version: "0.2.0".to_string(),
-            repository: "leonardopedro/zentinel-agent-waf".to_string(),
+            repository: "zentinelproxy/zentinel-agent-waf".to_string(),
             binary_name: "zentinel-waf-agent".to_string(),
             precomputed_urls: HashMap::new(),
         };
@@ -554,7 +554,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
         let url = agent.download_url("linux", "amd64");
         assert_eq!(
             url,
-            "https://github.com/leonardopedro/zentinel-agent-waf/releases/download/v0.2.0/zentinel-waf-agent-0.2.0-linux-x86_64.tar.gz"
+            "https://github.com/zentinelproxy/zentinel-agent-waf/releases/download/v0.2.0/zentinel-waf-agent-0.2.0-linux-x86_64.tar.gz"
         );
     }
 
@@ -563,7 +563,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
         let agent = AgentInfo {
             name: "ratelimit".to_string(),
             version: "1.0.0".to_string(),
-            repository: "leonardopedro/zentinel-agent-ratelimit".to_string(),
+            repository: "zentinelproxy/zentinel-agent-ratelimit".to_string(),
             binary_name: "zentinel-ratelimit-agent".to_string(),
             precomputed_urls: HashMap::new(),
         };
@@ -571,7 +571,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
         let url = agent.download_url("linux", "arm64");
         assert_eq!(
             url,
-            "https://github.com/leonardopedro/zentinel-agent-ratelimit/releases/download/v1.0.0/zentinel-ratelimit-agent-1.0.0-linux-aarch64.tar.gz"
+            "https://github.com/zentinelproxy/zentinel-agent-ratelimit/releases/download/v1.0.0/zentinel-ratelimit-agent-1.0.0-linux-aarch64.tar.gz"
         );
     }
 
@@ -580,7 +580,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
         let agent = AgentInfo {
             name: "denylist".to_string(),
             version: "0.5.0".to_string(),
-            repository: "leonardopedro/zentinel-agent-denylist".to_string(),
+            repository: "zentinelproxy/zentinel-agent-denylist".to_string(),
             binary_name: "zentinel-denylist-agent".to_string(),
             precomputed_urls: HashMap::new(),
         };
@@ -595,7 +595,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
         let agent = AgentInfo {
             name: "waf".to_string(),
             version: "0.2.0".to_string(),
-            repository: "leonardopedro/zentinel-agent-waf".to_string(),
+            repository: "zentinelproxy/zentinel-agent-waf".to_string(),
             binary_name: "zentinel-waf-agent".to_string(),
             precomputed_urls: HashMap::new(),
         };
@@ -676,7 +676,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
             "waf".to_string(),
             ApiBundleAgent {
                 version: "0.3.0".to_string(),
-                repository: "leonardopedro/zentinel-agent-waf".to_string(),
+                repository: "zentinelproxy/zentinel-agent-waf".to_string(),
                 binary_name: "zentinel-waf-agent".to_string(),
                 download_urls,
                 checksums: HashMap::new(),
@@ -715,7 +715,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
         let agent = AgentInfo {
             name: "waf".to_string(),
             version: "0.3.0".to_string(),
-            repository: "leonardopedro/zentinel-agent-waf".to_string(),
+            repository: "zentinelproxy/zentinel-agent-waf".to_string(),
             binary_name: "zentinel-waf-agent".to_string(),
             precomputed_urls: HashMap::new(),
         };
@@ -723,7 +723,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
         let url = agent.download_url("linux", "amd64");
         assert_eq!(
             url,
-            "https://github.com/leonardopedro/zentinel-agent-waf/releases/download/v0.3.0/zentinel-waf-agent-0.3.0-linux-x86_64.tar.gz"
+            "https://github.com/zentinelproxy/zentinel-agent-waf/releases/download/v0.3.0/zentinel-waf-agent-0.3.0-linux-x86_64.tar.gz"
         );
     }
 
@@ -738,7 +738,7 @@ denylist = "leonardopedro/zentinel-agent-denylist"
         let agent = AgentInfo {
             name: "waf".to_string(),
             version: "0.3.0".to_string(),
-            repository: "leonardopedro/zentinel-agent-waf".to_string(),
+            repository: "zentinelproxy/zentinel-agent-waf".to_string(),
             binary_name: "zentinel-waf-agent".to_string(),
             precomputed_urls: precomputed,
         };

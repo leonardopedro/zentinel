@@ -240,7 +240,7 @@ ratelimit:
   replicaCount: 2
 
   image:
-    repository: ghcr.io/leonardopedro/zentinel-ratelimit
+    repository: ghcr.io/zentinelproxy/zentinel-ratelimit
     pullPolicy: IfNotPresent
     tag: ""
 
@@ -290,7 +290,7 @@ waf:
   replicaCount: 2
 
   image:
-    repository: ghcr.io/leonardopedro/zentinel-waf
+    repository: ghcr.io/zentinelproxy/zentinel-waf
     pullPolicy: IfNotPresent
     tag: ""
 
@@ -362,7 +362,7 @@ denylist:
   replicaCount: 1
 
   image:
-    repository: ghcr.io/leonardopedro/zentinel-denylist
+    repository: ghcr.io/zentinelproxy/zentinel-denylist
     pullPolicy: IfNotPresent
     tag: ""
 
@@ -394,7 +394,7 @@ echo:
   replicaCount: 1
 
   image:
-    repository: ghcr.io/leonardopedro/zentinel-echo-agent
+    repository: ghcr.io/zentinelproxy/zentinel-echo-agent
     pullPolicy: IfNotPresent
     tag: ""
 

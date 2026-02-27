@@ -66,6 +66,14 @@ impl ProxyHttp for ZentinelProxy {
             error = %e,
             "Failed to connect to upstream peer"
         );
+        self.log_manager.log_request_error(
+            "error",
+            "Failed to connect to upstream peer",
+            &ctx.trace_id,
+            ctx.route_id.as_deref(),
+            ctx.upstream.as_deref(),
+            Some(format!("peer={} error={}", peer.address(), e)),
+        );
         // Custom error pages are handled in response_filter
         e
     }
@@ -273,6 +281,17 @@ impl ProxyHttp for ZentinelProxy {
                         path = %request_info.path,
                         host = %request_info.host,
                         "No matching route found for request"
+                    );
+                    self.log_manager.log_request_error(
+                        "warn",
+                        "No matching route found for request",
+                        &ctx.trace_id,
+                        None,
+                        None,
+                        Some(format!(
+                            "method={} path={} host={}",
+                            request_info.method, request_info.path, request_info.host
+                        )),
                     );
                     Error::explain(ErrorType::InternalError, "No matching route found")
                 })?;
@@ -575,6 +594,14 @@ impl ProxyHttp for ZentinelProxy {
                     upstream = %upstream_name,
                     "Upstream pool not found"
                 );
+                self.log_manager.log_request_error(
+                    "error",
+                    "Upstream pool not found",
+                    &ctx.trace_id,
+                    ctx.route_id.as_deref(),
+                    Some(upstream_name),
+                    None,
+                );
                 Error::explain(
                     ErrorType::InternalError,
                     format!("Upstream pool '{}' not found", upstream_name),
@@ -693,6 +720,14 @@ impl ProxyHttp for ZentinelProxy {
             selection_duration_ms = selection_duration.as_millis(),
             last_error = ?last_error,
             "All upstream selection attempts failed"
+        );
+        self.log_manager.log_request_error(
+            "error",
+            "All upstream selection attempts failed",
+            &ctx.trace_id,
+            ctx.route_id.as_deref(),
+            Some(upstream_name),
+            Some(format!("attempts={} error={:?}", max_retries, last_error)),
         );
 
         // Record exhausted metric if fallback was used but all upstreams failed
@@ -1906,6 +1941,102 @@ impl ProxyHttp for ZentinelProxy {
             }
         }
 
+        // Process response headers through agents (for agents that subscribe to ResponseHeaders events)
+        if !ctx.route_agent_ids.is_empty() {
+            let agent_ids = ctx.route_agent_ids.clone();
+            let mut resp_headers_map: std::collections::HashMap<String, Vec<String>> =
+                std::collections::HashMap::with_capacity(upstream_response.headers.len());
+            for (name, value) in upstream_response.headers.iter() {
+                resp_headers_map
+                    .entry(name.as_str().to_string())
+                    .or_default()
+                    .push(value.to_str().unwrap_or("").to_string());
+            }
+
+            let agent_ctx = crate::agents::AgentCallContext {
+                correlation_id: zentinel_common::CorrelationId::from_string(&ctx.trace_id),
+                metadata: zentinel_agent_protocol::RequestMetadata {
+                    correlation_id: ctx.trace_id.clone(),
+                    request_id: uuid::Uuid::new_v4().to_string(),
+                    client_ip: ctx.client_ip.clone(),
+                    client_port: 0,
+                    server_name: ctx.host.clone(),
+                    protocol: "HTTP/1.1".to_string(),
+                    tls_version: None,
+                    tls_cipher: None,
+                    route_id: ctx.route_id.clone(),
+                    upstream_id: ctx.upstream.clone(),
+                    timestamp: chrono::Utc::now().to_rfc3339(),
+                    traceparent: ctx.traceparent(),
+                },
+                route_id: ctx.route_id.clone(),
+                upstream_id: ctx.upstream.clone(),
+                request_body: None,
+                response_body: None,
+            };
+
+            match self
+                .agent_manager
+                .process_response_headers(&agent_ctx, status, &resp_headers_map, &agent_ids)
+                .await
+            {
+                Ok(decision) => {
+                    // Apply response header modifications from agent
+                    for op in &decision.response_headers {
+                        match op {
+                            zentinel_agent_protocol::HeaderOp::Set { name, value } => {
+                                upstream_response
+                                    .insert_header(name.clone(), value.as_str())
+                                    .ok();
+                            }
+                            zentinel_agent_protocol::HeaderOp::Add { name, value } => {
+                                upstream_response
+                                    .append_header(name.clone(), value.as_str())
+                                    .ok();
+                            }
+                            zentinel_agent_protocol::HeaderOp::Remove { name } => {
+                                upstream_response.remove_header(name);
+                            }
+                        }
+                    }
+
+                    // Check if any agent subscribes to response body events
+                    let has_body_agents = self
+                        .agent_manager
+                        .any_agent_handles_event(
+                            &agent_ids,
+                            zentinel_agent_protocol::EventType::ResponseBodyChunk,
+                        )
+                        .await;
+                    if has_body_agents {
+                        ctx.response_agent_processing_enabled = true;
+                        // Since agent may replace the body, Content-Length is invalid.
+                        // Use Connection: close to signal end-of-body to the client.
+                        upstream_response.insert_header("Connection", "close").ok();
+                        session.downstream_session.set_keepalive(None);
+                        debug!(
+                            correlation_id = %ctx.trace_id,
+                            "Enabling response body agent processing (agent subscribes to ResponseBody)"
+                        );
+                    }
+
+                    debug!(
+                        correlation_id = %ctx.trace_id,
+                        response_headers_modified = !decision.response_headers.is_empty(),
+                        needs_body = ctx.response_agent_processing_enabled,
+                        "Response headers processed through agents"
+                    );
+                }
+                Err(e) => {
+                    warn!(
+                        correlation_id = %ctx.trace_id,
+                        error = %e,
+                        "Agent response header processing failed, continuing without agent"
+                    );
+                }
+            }
+        }
+
         // Generate custom error pages for error responses
         if status >= 400 {
             trace!(
@@ -1984,6 +2115,20 @@ impl ProxyHttp for ZentinelProxy {
                 attempts = ctx.upstream_attempts,
                 "Request completed with server error"
             );
+            self.log_manager.log_request_error(
+                "error",
+                "Request completed with server error",
+                &ctx.trace_id,
+                ctx.route_id.as_deref(),
+                ctx.upstream.as_deref(),
+                Some(format!(
+                    "status={} method={} path={} duration_ms={}",
+                    status,
+                    ctx.method,
+                    ctx.path,
+                    duration.as_millis()
+                )),
+            );
         } else if status >= 400 {
             warn!(
                 correlation_id = %ctx.trace_id,
@@ -1994,6 +2139,17 @@ impl ProxyHttp for ZentinelProxy {
                 status = status,
                 duration_ms = duration.as_millis(),
                 "Request completed with client error"
+            );
+            self.log_manager.log_request_error(
+                "warn",
+                "Request completed with client error",
+                &ctx.trace_id,
+                ctx.route_id.as_deref(),
+                ctx.upstream.as_deref(),
+                Some(format!(
+                    "status={} method={} path={}",
+                    status, ctx.method, ctx.path
+                )),
             );
         } else {
             debug!(
@@ -2237,6 +2393,115 @@ impl ProxyHttp for ZentinelProxy {
             }
             // Skip normal body processing for WebSocket
             return Ok(None);
+        }
+
+        // Process response body through agents (for agents that subscribe to ResponseBody events)
+        if ctx.response_agent_processing_enabled && !ctx.route_agent_ids.is_empty() {
+            if let Some(ref chunk) = body {
+                ctx.response_agent_body_buffer.extend_from_slice(chunk);
+            }
+
+            if end_of_stream {
+                let agent_ids = ctx.route_agent_ids.clone();
+                let buffer = std::mem::take(&mut ctx.response_agent_body_buffer);
+                let chunk_index = 0u32;
+                let total_size = Some(buffer.len());
+                let trace_id = ctx.trace_id.clone();
+                let client_ip = ctx.client_ip.clone();
+                let host = ctx.host.clone();
+                let route_id = ctx.route_id.clone();
+                let upstream_id = ctx.upstream.clone();
+                let traceparent = ctx.traceparent();
+                let agent_mgr = self.agent_manager.clone();
+
+                // Use block_in_place to run async agent call from sync context
+                // This is safe because Pingora uses a multi-threaded tokio runtime
+                let result = tokio::task::block_in_place(|| {
+                    tokio::runtime::Handle::current().block_on(async {
+                        let agent_ctx = crate::agents::AgentCallContext {
+                            correlation_id: zentinel_common::CorrelationId::from_string(&trace_id),
+                            metadata: zentinel_agent_protocol::RequestMetadata {
+                                correlation_id: trace_id.clone(),
+                                request_id: uuid::Uuid::new_v4().to_string(),
+                                client_ip,
+                                client_port: 0,
+                                server_name: host,
+                                protocol: "HTTP/1.1".to_string(),
+                                tls_version: None,
+                                tls_cipher: None,
+                                route_id: route_id.clone(),
+                                upstream_id: upstream_id.clone(),
+                                timestamp: chrono::Utc::now().to_rfc3339(),
+                                traceparent,
+                            },
+                            route_id,
+                            upstream_id,
+                            request_body: None,
+                            response_body: None,
+                        };
+
+                        agent_mgr
+                            .process_response_body_streaming(
+                                &agent_ctx,
+                                &buffer,
+                                true, // is_last
+                                chunk_index,
+                                buffer.len(),
+                                total_size,
+                                &agent_ids,
+                            )
+                            .await
+                    })
+                });
+
+                match result {
+                    Ok(decision) => {
+                        // Apply response body mutation if present
+                        if let Some(mutation) = decision.response_body_mutation {
+                            if let Some(ref data) = mutation.data {
+                                if !data.is_empty() {
+                                    // Decode base64 body from agent
+                                    if let Ok(decoded) = base64::Engine::decode(
+                                        &base64::engine::general_purpose::STANDARD,
+                                        data,
+                                    ) {
+                                        debug!(
+                                            correlation_id = %ctx.trace_id,
+                                            original_size = buffer.len(),
+                                            new_size = decoded.len(),
+                                            "Agent replaced response body"
+                                        );
+                                        *body = Some(Bytes::from(decoded));
+                                        ctx.response_agent_body_complete = true;
+                                    } else {
+                                        warn!(
+                                            correlation_id = %ctx.trace_id,
+                                            "Failed to decode agent response body mutation (invalid base64)"
+                                        );
+                                    }
+                                }
+                                // Empty data means drop the chunk — leave body as-is
+                            }
+                            // None data means pass through unchanged
+                        }
+
+                        // Apply any additional response header modifications
+                        // Note: Cannot modify response headers here (sync context, headers already sent)
+                        // Header mods should be done in response_filter via ResponseHeaders event
+                    }
+                    Err(e) => {
+                        warn!(
+                            correlation_id = %ctx.trace_id,
+                            error = %e,
+                            "Agent response body processing failed, passing through original"
+                        );
+                    }
+                }
+            } else if !end_of_stream {
+                // Buffer chunks — suppress output until we have the full body
+                *body = None;
+                return Ok(None);
+            }
         }
 
         // Track response body size
@@ -3527,6 +3792,14 @@ impl ZentinelProxy {
                         error = %e,
                         "Agent streaming body inspection failed, blocking (fail-closed)"
                     );
+                    self.log_manager.log_request_error(
+                        "error",
+                        "Agent streaming body inspection failed, blocking (fail-closed)",
+                        &ctx.trace_id,
+                        ctx.route_id.as_deref(),
+                        ctx.upstream.as_deref(),
+                        Some(format!("error={}", e)),
+                    );
                     return Err(Error::explain(
                         ErrorType::HTTPStatus(503),
                         "Service unavailable",
@@ -3536,6 +3809,14 @@ impl ZentinelProxy {
                         correlation_id = %ctx.trace_id,
                         error = %e,
                         "Agent streaming body inspection failed, allowing (fail-open)"
+                    );
+                    self.log_manager.log_request_error(
+                        "warn",
+                        "Agent streaming body inspection failed, allowing (fail-open)",
+                        &ctx.trace_id,
+                        ctx.route_id.as_deref(),
+                        ctx.upstream.as_deref(),
+                        Some(format!("error={}", e)),
                     );
                 }
             }
@@ -3706,6 +3987,14 @@ impl ZentinelProxy {
                         error = %e,
                         "Agent body inspection failed, blocking (fail-closed)"
                     );
+                    self.log_manager.log_request_error(
+                        "error",
+                        "Agent body inspection failed, blocking (fail-closed)",
+                        &ctx.trace_id,
+                        ctx.route_id.as_deref(),
+                        ctx.upstream.as_deref(),
+                        Some(format!("error={}", e)),
+                    );
                     return Err(Error::explain(
                         ErrorType::HTTPStatus(503),
                         "Service unavailable",
@@ -3715,6 +4004,14 @@ impl ZentinelProxy {
                         correlation_id = %ctx.trace_id,
                         error = %e,
                         "Agent body inspection failed, allowing (fail-open)"
+                    );
+                    self.log_manager.log_request_error(
+                        "warn",
+                        "Agent body inspection failed, allowing (fail-open)",
+                        &ctx.trace_id,
+                        ctx.route_id.as_deref(),
+                        ctx.upstream.as_deref(),
+                        Some(format!("error={}", e)),
                     );
                 }
             }
